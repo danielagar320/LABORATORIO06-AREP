@@ -1,6 +1,7 @@
 # LABORATORIO 5 AREP
 
-### Autor: Daniela Garcia Romero
+### Autor: Daniela Garcia 
+
 
 Este laboratorio cuenta con tres servidores y para distribuir la carga se usa Round Robin que lo que hace es dividirla en tres y asi lograr balancearla para que no se sature el servidor.
 
