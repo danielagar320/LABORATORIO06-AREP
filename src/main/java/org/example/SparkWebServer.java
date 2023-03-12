@@ -1,14 +1,16 @@
 package org.example;
 
+import org.example.database.MongoConnection;
+
 import java.util.List;
 
 import static spark.Spark.*;
 
-public class LogServiceApp {
+public class SparkWebServer {
 
     public static void main(String... args){
 
-        MongoDBConnection mongoConnection = new MongoDBConnection();
+        MongoConnection mongoConnection = new MongoConnection();
         mongoConnection.createConnection();
         mongoConnection.closeConnection();
         port(getPort());
@@ -23,7 +25,7 @@ public class LogServiceApp {
         post("/service", (req,res) -> {
             mongoConnection.createConnection();
             if(req.body()!=null){
-                mongoConnection.addDocument(req.body());
+                mongoConnection.addItem(req.body());
             }
             List<String> colecctions = mongoConnection.getDocumentsColecction();
             mongoConnection.closeConnection();

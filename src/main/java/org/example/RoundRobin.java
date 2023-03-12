@@ -12,7 +12,7 @@ import static spark.Spark.*;
 
 public class RoundRobin {
 
-    public static String url = "http://localhost:3400";
+    public static String url = "http://172.19.16.1:3400";
     private static final String USER_AGENT = "Mozilla/5.0";
     private static int valueRoundRobin = 0;
 
@@ -21,13 +21,11 @@ public class RoundRobin {
 
         port(getPort());
 
-        staticFiles.location("/public");
+        staticFiles.location("/frontend");
 
         get("/app", (req,res) -> getData());
 
         post("/app", (req,res) -> getPost(req.body()));
-
-        get("favicon.ico", (req,res) -> "");
 
     }
 
