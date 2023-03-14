@@ -14,7 +14,6 @@ public class RoundRobin {
 
     public static String url = "http://172.19.16.1:3400";
     private static final String USER_AGENT = "Mozilla/5.0";
-    private static int valueRoundRobin = 0;
 
 
     public static void main(String... args){
@@ -23,16 +22,15 @@ public class RoundRobin {
 
         staticFiles.location("/frontend");
 
-        get("/app", (req,res) -> getData());
+        get("/app", (req,res) -> getItem());
 
         post("/app", (req,res) -> getPost(req.body()));
 
     }
 
-    public static String getData() throws IOException {
-        Random r = new Random();
-        int num = r.nextInt(3);
-        URL obj = new URL(url + num + "/service");
+    public static String getItem() throws IOException {
+        String[] direcciones = {};
+        URL obj = new URL(url + getRoundRobin() + "4567/service");
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", USER_AGENT);
@@ -51,37 +49,30 @@ public class RoundRobin {
         }
     }
 
-    public static String getPost(String text) throws IOException {
-        Random r = new Random();
-        int num = r.nextInt(3);
-        URL obj = new URL(url + num + "/service");
+    private static String getRoundRobin(){
+        String[] direcciones = {};
+        Random i = new Random();
+        return direcciones[i.nextInt(3)];
+    }
 
+    public static String getPost(String text) throws IOException {
+        URL obj = new URL(url + getRoundRobin() + "/service");
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "text/plain");
         con.setRequestProperty("Accept", "text/plain");
         con.setDoOutput(true);
 
-        try(OutputStream os = con.getOutputStream()) {
-            byte[] input = text.getBytes("utf-8");
-            os.write(input, 0, input.length);
-        }
+        OutputStream os = con.getOutputStream();
+        os.write(text.getBytes());
+        os.flush();
+        os.close();
+        System.out.println("ADICIONO " + con.getResponseCode());
 
-        int responseCode = con.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            BufferedReader in = new BufferedReader(new InputStreamReader( con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            return response.toString();
-        } else {
-            return "POST request not worked";
-        }
-
+        return getItem();
     }
+
+
 
     private static int getPort() {
         if (System.getenv("PORT") != null) {
