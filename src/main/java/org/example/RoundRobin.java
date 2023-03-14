@@ -12,7 +12,7 @@ import static spark.Spark.*;
 
 public class RoundRobin {
 
-    public static String url = "http://172.19.16.1:3400";
+    public static String url = "http://";
     private static final String USER_AGENT = "Mozilla/5.0";
 
 
@@ -49,11 +49,12 @@ public class RoundRobin {
         }
     }
 
-    private static String getRoundRobin(){
-        String[] direcciones = {};
+    private static String getRoundRobin() {
+        String[] direcciones = {"54.237.127.133", "54.90.3.78", "44.199.203.149"};
         Random i = new Random();
         return direcciones[i.nextInt(3)];
     }
+
 
     public static String getPost(String text) throws IOException {
         URL obj = new URL(url + getRoundRobin() + "/service");

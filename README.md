@@ -40,77 +40,46 @@ Para el despliegue se usa Docker el cual automatiza este proceso usando contened
 ### Uso de la aplicación
 
 Para poder correr el programa se deben seguir los siguientes pasos:
-* Clonar el respositorio con el comando
-
-```
-git clone https://github.com/danielagar320/LABORATIO05-AREP.git
+* Clonar el respositorio con el 
 
 ```
 
-* Con los siguientes comandos descargamos las dependencias en el target.
-
-```
 mvn clean install
 
 ```
 
-* Construimos los servicios y los corremos en Docker con los siguientes comandos:
-
-```
-docker-compose build 
-
-docker-compose up -d 
-```
 
 ![](img/img.png)
 
-
-* En Docker Hube creamos tres respositorios diferntes.
-
-![](img/img_1.png)
-
-* Subimos las images a los repositorios con los siguientes comandos:
-
-```
-docker tag nombre-imagen usuario/repositorio
-
-docker login
-
-git push usuario/repositorio
-```
-
-
 ![](img/img_2.png)
 
-![](img/img_3.png)
-
-* En AWS creamos una instancia de EC2
+* Instalamos java en cada una de las instancias menos en la de mongo
 
 ![](img/img_4.png)
 
-* Por nedio de git bash nos conectamos a la maquina
+![](img/img_3.png)
+
+* Instancia 3
 
 ![](img/img_5.png)
 
-* Con los siguientes comandos subimos las imagenes creadas a AWS.
-
-```
-sudo docker run -d -p 42000:6000 --name roundrobin danielagar320/web
-sudo docker run -d -p 34000:6000 --name log1 danielagar320/instancia
-sudo docker run -d -p 34001:6000 --name log2 danielagar320/instancia
-sudo docker run -d -p 34002:6000 --name log3 danielagar320/instancia
-sudo docker run -d -p 27017:6000 --name mongodb danielagar320/mongodb
-```
+* Instancia 2
 
 ![](img/img_6.png)
-
-* Abrimos el puerto 42000 en la instancia de EC2.
+* Instancia 1
 
 ![](img/img_7.png)
 
-* Verificamos el funcionamiento con la direccion DNS proporcionada por la instancia.
+* RoundRobin
 
 ![](img/img_8.png)
+
+
+![img.png](img.png)
+
+![img_1.png](img_1.png)
+
+
 
 ### Autor
 

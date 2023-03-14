@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MongoConnection {
 
-    private String url = "172.19.16.1:27017";
+    private String url = "44.200.55.254:27017";
     private MongoClient mongoClient = null;
     private MongoDatabase mongoDatabase = null;
     private MongoCollection<Document> mongoCollection;
