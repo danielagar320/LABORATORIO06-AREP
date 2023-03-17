@@ -1,4 +1,4 @@
-# LABORATORIO 5 AREP
+# LABORATORIO 6 AREP
 
 ### Autor: Daniela Garcia 
 
@@ -130,21 +130,51 @@ sudo systemctl status mongod
 
 ![](img/img9.png)
 
-* 
-
-
-![](img/img_3.png)
-
-
-
-
-
+* Con el siguiente comando generamos la carpeta target, la comprimimos en un archivo .zip y lo subimos en todas las instancias menos en la de mongo. 
 
 ```
-
 mvn clean install
 
 ```
+![image](https://user-images.githubusercontent.com/111092204/225787356-e28e8c06-fbe5-4a0d-a8b1-16c7bbc8a712.png)
+
+* Agregamos una regla de entrada que acepte todo tipo de trafico
+
+![image](https://user-images.githubusercontent.com/111092204/225789050-be64c832-57a1-4866-98c5-c788cdc27999.png)
+
+
+* Ejecutamos la carpeta target con el siguiente comando en las instancias 
+
+```
+java -cp "target/classes:target/dependency/*" org.example.SparkWebServer
+
+```
+
+![image](https://user-images.githubusercontent.com/111092204/225787956-30b18d9f-7671-45aa-874a-9d98d3e4cb10.png)
+
+* Ejecutamos la carpeta target con el siguiente comando en la instancia del RoundRobin
+
+```
+java -cp "target/classes:target/dependency/*" org.example.RoundRobin
+
+```
+
+![image](https://user-images.githubusercontent.com/111092204/225788395-cac800c8-6627-46ff-af12-80d72afea481.png)
+
+* Para terminar abrimos el siguiente link en el navegador 
+
+```
+http://ec2-54-236-49-149.compute-1.amazonaws.com:4566/
+
+```
+
+![image](https://user-images.githubusercontent.com/111092204/225791046-e7d2a46c-ac33-44b8-b29f-91c143dacdb2.png)
+
+
+
+
+
+
 
 
 
